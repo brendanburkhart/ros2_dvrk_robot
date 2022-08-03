@@ -19,6 +19,8 @@ http://www.cisst.org/cisst/license.txt.
 // system
 #include <iostream>
 #include <map>
+#include <string>
+#include <vector>
 
 // cisst/saw
 #include <cisstCommon/cmnPath.h>
@@ -75,6 +77,15 @@ int main(int argc, char ** argv)
 
     // create ROS node handle
     rclcpp::init(argc, argv);
+    // remove ROS arguments
+    std::vector<std::string> args = rclcpp::remove_ros_arguments(argc, argv);
+    std::vector<char *> args_c_strings;
+    for (auto & arg : args) {
+        args_c_strings.push_back(&arg.front());
+    }
+    argv = args_c_strings.data();
+    argc = static_cast<int>(args_c_strings.size());
+
     auto rosNode = std::make_shared<rclcpp::Node>("dVRK");
 
     // parse options

@@ -125,6 +125,10 @@ if (cisst_FOUND_AS_REQUIRED)
     INCLUDES DESTINATION include
     )
 
+  install (DIRECTORY launch
+    DESTINATION share/${PROJECT_NAME}
+  )
+
   ament_package ()
 
 endif (cisst_FOUND_AS_REQUIRED)
